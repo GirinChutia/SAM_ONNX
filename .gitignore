@@ -5,3 +5,5 @@ export_models/sam_onnx/l0
 /sam_onnx.egg-info
 /temp_files
 /dist
+/fig
+

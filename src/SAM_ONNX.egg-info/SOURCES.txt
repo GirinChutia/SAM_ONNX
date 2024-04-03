@@ -1,8 +1,0 @@
-README.md
-pyproject.toml
-src/SAM_ONNX.egg-info/PKG-INFO
-src/SAM_ONNX.egg-info/SOURCES.txt
-src/SAM_ONNX.egg-info/dependency_links.txt
-src/SAM_ONNX.egg-info/top_level.txt
-src/sam_onnx/__init__.py
-src/sam_onnx/sam_onnx.py

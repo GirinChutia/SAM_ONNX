@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0","matplotlib==3.8.3","numpy==1.26.4","onnxruntime==1.17.1","opencv_python==4.9.0.80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "SAM_ONNX"
+version = "0.0.1"
+description = "A simple package for using SAM with ONNX without pytorch dependencies"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Girin Chutia", email = "girin.iitm@gmail.com" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]

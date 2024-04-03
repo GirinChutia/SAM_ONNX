@@ -1,0 +1,7 @@
+/.sam_env
+/__pycache__
+export_models/sam_onnx/xl0
+export_models/sam_onnx/l0
+/sam_onnx.egg-info
+/temp_files
+/dist

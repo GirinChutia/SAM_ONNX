@@ -1,4 +1,4 @@
-# SAM ONNX
+# SAM ONNX (* Under Development)
 
 Welcome to the documentation for Project Name! This repository contains the source code for the project.
 
@@ -6,17 +6,11 @@ Welcome to the documentation for Project Name! This repository contains the sour
 
 Explore our detailed documentation on [GitHub Pages](https://girinchutia.github.io/SAM_ONNX/).
 
-## Features
-
-- Feature 1
-- Feature 2
-- Feature 3
-
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/yourusername/projectname.git`
-2. Install dependencies: `npm install`
-3. Run the project: `npm start`
+1. Clone the repository: `git clone https://github.com/GirinChutia/SAM_ONNX.git`
+2. Build the project: `py -m build`
+3. Install the package: `pip install dist/SAM_ONNX-0.0.1-py3-none-any.whl`
 
 ## Usage
 

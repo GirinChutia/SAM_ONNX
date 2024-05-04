@@ -1,3 +1,9 @@
 /fig
 /dist
 /src/SAM_ONNX.egg-info
+/.env
+/build
+/src/sam_onnx/__pycache__
+/model_weights
+/.ipynb_checkpoints
+/src/sam_onnx/.ipynb_checkpoints

@@ -1,26 +1,19 @@
 # SAM ONNX (* Under Development)
-
+`
 Welcome to the documentation for Project Name! This repository contains the source code for the project.
 
-## Documentation
+## Environment creation Creation (For Development)
 
-Explore our detailed documentation on [GitHub Pages](https://girinchutia.github.io/SAM_ONNX/).
+> python -m venv sam_onnx_env
+
+- Use pip 24.0 or higher version 
 
 ## Installation
-
-1. Clone the repository: `git clone https://github.com/GirinChutia/SAM_ONNX.git`
-2. Build the project: `py -m build`
-3. Install the package: `pip install dist/SAM_ONNX-0.0.1-py3-none-any.whl`
+In SAM_ONNX Folder
+> python -m pip install -e .
 
 ## Usage
-
-```
-import onnx_sam
-```
-
-## Contributing
-
-We welcome contributions! Please see our [Contribution Guidelines](CONTRIBUTING.md) for more details.
+![alt text](repo_assests/demo.png)
 
 ## License
 

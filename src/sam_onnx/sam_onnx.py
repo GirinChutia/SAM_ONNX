@@ -1,12 +1,62 @@
 from copy import deepcopy
-from typing import Any, Tuple, Union
+from typing import Any, Tuple, Union, List
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import onnxruntime as ort
 import glob
+import gdown
+import os
 
+def check_and_download_weights(model_name='l0'):
 
+    __supported_modelnames = ['l0', 'xl0']
+
+    assert model_name in __supported_modelnames, f'Model name not supported. Please use one of : {__supported_modelnames}'
+    
+    l0_weights = {'encoder' : 'https://drive.google.com/file/d/1a0tRmHQeGTAbSeMqBMhu4DinsOR3cSv6/view?usp=sharing',
+                 'decoder': 'https://drive.google.com/file/d/13J7pNfh016sBqOQ17CludkUFdKgkkyQM/view?usp=sharing'}
+    
+    xl0_weights = {'encoder': 'https://drive.google.com/file/d/1NzavgCAqk6mSzTnQ_LKfl78V_O68lWNX/view?usp=sharing',
+                  'decoder': 'https://drive.google.com/file/d/1lrn5bQRE01Mwtp-nr9DBNTHcxk4Q6iiP/view?usp=sharing'}
+    
+    if os.path.exists('model_weights'):
+        model_weights_folder_path = os.path.abspath('model_weights')
+    else:
+        os.makedirs('model_weights', 
+                    exist_ok = False)
+        model_weights_folder_path = os.path.abspath('model_weights')
+    
+    if os.path.exists(f'model_weights/{model_name}/encoder.onnx'):
+        encoder_weights_path = os.path.abspath(f'model_weights/{model_name}/encoder.onnx')
+    else:
+        os.makedirs(f'model_weights/{model_name}', 
+                    exist_ok = True)
+        if model_name == 'l0':
+            gdown.download(l0_weights['encoder'],
+                           f'model_weights/{model_name}/encoder.onnx', 
+                           fuzzy=True)
+        if model_name == 'xl0':
+            gdown.download(xl0_weights['encoder'],
+                           f'model_weights/{model_name}/encoder.onnx', 
+                           fuzzy=True)
+        encoder_weights_path = os.path.abspath(f'model_weights/{model_name}/encoder.onnx')
+            
+    if os.path.exists(f'model_weights/{model_name}/decoder.onnx'):
+        decoder_weights_path = os.path.abspath(f'model_weights/{model_name}/decoder.onnx')
+    else:
+        if model_name == 'l0':
+            gdown.download(l0_weights['decoder'],
+                           f'model_weights/{model_name}/decoder.onnx', 
+                           fuzzy=True)
+        if model_name == 'xl0':
+            gdown.download(xl0_weights['decoder'],
+                           f'model_weights/{model_name}/decoder.onnx', 
+                           fuzzy=True)
+        decoder_weights_path = os.path.abspath(f'model_weights/{model_name}/decoder.onnx')
+
+    return encoder_weights_path, decoder_weights_path
+    
 def show_mask(mask, ax, random_color=False):
     """
     Visualize a mask image on the given axis.
@@ -526,23 +576,27 @@ class InferSAM:
 
     """
 
-    def __init__(self, model_dir: str, model_name: str = "l0"):
-        assert model_dir is not None, "model_dir is null"
+    def __init__(self, model_name: str = "l0"):
+        # assert model_dir is not None, "model_dir is null"
         assert model_name is not None, "model_name is null"
 
         self.model_name = model_name
-
+        encoder_weights_path, decoder_weights_path = check_and_download_weights(model_name)
+        
         # Find encoder and decoder models
-        encoder_path = glob.glob(model_dir + "/*_encoder.onnx")[0]
-        decoder_path = glob.glob(model_dir + "/*_decoder.onnx")[0]
+        encoder_path = encoder_weights_path # glob.glob(model_dir + "/*_encoder.onnx")[0]
+        decoder_path = decoder_weights_path # glob.glob(model_dir + "/*_decoder.onnx")[0]
 
         self.encoder = SamEncoder(encoder_path)
         self.decoder = SamDecoder(decoder_path)
 
+        self.figsize = (10,10)
+
     def infer(
         self,
         img_path: str,
-        boxes: list[list] = [[80, 50, 320, 420], [300, 20, 530, 420]],
+        boxes: List[list] = [[80, 50, 320, 420], [300, 20, 530, 420]],
+        visualize=False,
     ) -> np.array:
         """
         Infer segmentation masks for a given image using the SAM model.
@@ -585,7 +639,18 @@ class InferSAM:
             origin_image_size=origin_image_size,
             boxes=boxes,
         )
-        
+        if visualize:
+            plt.figure(figsize=self.figsize)
+            plt.imshow(raw_img)
+            for mask in masks:
+                show_mask(mask, plt.gca(), 
+                          random_color=True)
+            for box in boxes:
+                show_box(box, plt.gca())
+            plt.show()
         return masks
+
+    def set_figsize(self,figsize=(10,10)):
+        self.figsize = figsize
 
 

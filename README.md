@@ -1,8 +1,6 @@
-# SAM ONNX (* Under Development)
-`
-Welcome to the documentation for Project Name! This repository contains the source code for the project.
+# SAM ONNX 
 
-## Environment creation Creation (For Development)
+## Environment creation
 
 > python -m venv sam_onnx_env
 

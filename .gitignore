@@ -7,3 +7,4 @@
 /model_weights
 /.ipynb_checkpoints
 /src/sam_onnx/.ipynb_checkpoints
+/.pypirc

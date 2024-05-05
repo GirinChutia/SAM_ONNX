@@ -1,17 +1,25 @@
 # SAM ONNX 
 
-## Environment creation
-
-> python -m venv sam_onnx_env
-
-- Use pip 24.0 or higher version 
-
 ## Installation
-In SAM_ONNX Folder
-> python -m pip install -e .
+Get started quickly with SAM ONNX! Install it via pip:
+
+```bash
+pip install SAM-ONNX
+```
+
+Or from root SAM_ONNX folder run,
+```bash
+python -m pip install -e .
+```
+
+## Documentation
+
+[Documentation](https://girinchutia.github.io/SAM_ONNX/)
 
 ## Usage
-![alt text](repo_assests/demo.png)
+Checkout the below demo
+
+![demo](https://github.com/GirinChutia/SAM_ONNX/blob/main/repo_assests/demo.png)
 
 ## License
 
